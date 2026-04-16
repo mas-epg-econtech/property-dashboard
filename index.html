@@ -182,19 +182,8 @@
   body.locked main, body.locked nav, body.locked header { visibility: hidden; }
 </style>
 </head>
-<body class="locked">
+<body>
 
-<div id="auth-gate">
-  <div class="box">
-    <h2>Singapore Property Market Dashboard</h2>
-    <p>Enter the password to continue</p>
-    <form onsubmit="checkAuth(); return false;">
-      <input type="password" id="auth-pw" autofocus autocomplete="off">
-      <button type="submit">Enter</button>
-    </form>
-    <div id="auth-err"></div>
-  </div>
-</div>
 <script>
 async function checkAuth() {
   const pw   = document.getElementById('auth-pw').value;
