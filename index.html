@@ -153,71 +153,15 @@
   .method p, .method li { color: #374151; }
   .method ul { margin: 0; padding-left: 20px; }
 
-  /* ── password gate ───────────────────────────────────────────────── */
-  #auth-gate {
-    position: fixed; inset: 0; z-index: 10000; background: #fff;
-    display: flex; align-items: center; justify-content: center;
-  }
-  #auth-gate .box {
-    text-align: center; font-family: inherit;
-    padding: 40px 48px; border: 1px solid var(--border); border-radius: 8px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-  }
-  #auth-gate h2 { margin: 0 0 8px 0; font-size: 20px; font-weight: 600; }
-  #auth-gate p  { margin: 0 0 20px 0; color: var(--muted); font-size: 13px; }
-  #auth-gate input {
-    width: 260px; padding: 10px 12px; font-size: 14px;
-    border: 1px solid var(--border); border-radius: 6px; outline: none;
-  }
-  #auth-gate input:focus { border-color: var(--accent); }
-  #auth-gate button {
-    margin-left: 8px; padding: 10px 18px; font-size: 14px; cursor: pointer;
-    background: var(--accent); color: #fff;
-    border: 0; border-radius: 6px; font-weight: 500;
-  }
-  #auth-gate button:hover { filter: brightness(1.08); }
-  #auth-err { color: #dc2626; font-size: 13px; margin-top: 12px;
-              min-height: 18px; }
-  body.locked { overflow: hidden; }
-  body.locked main, body.locked nav, body.locked header { visibility: hidden; }
 </style>
 </head>
-<body class="locked">
-
-<div id="auth-gate">
-  <div class="box">
-    <h2>Singapore Property Market Dashboard</h2>
-    <p>Enter the password to continue</p>
-    <form onsubmit="checkAuth(); return false;">
-      <input type="password" id="auth-pw" autofocus autocomplete="off">
-      <button type="submit">Enter</button>
-    </form>
-    <div id="auth-err"></div>
-  </div>
-</div>
-<script>
-async function checkAuth() {
-  const pw   = document.getElementById('auth-pw').value;
-  const buf  = new TextEncoder().encode(pw);
-  const hash = await crypto.subtle.digest('SHA-256', buf);
-  const hex  = Array.from(new Uint8Array(hash))
-                 .map(b => b.toString(16).padStart(2,'0')).join('');
-  if (hex === '96869035ed72106a7d2d9eabd7c5b46ca832d3c51a5b2f524c36f224d870eb8b') {
-    document.getElementById('auth-gate').remove();
-    document.body.classList.remove('locked');
-  } else {
-    document.getElementById('auth-err').textContent = 'Incorrect password';
-    document.getElementById('auth-pw').value = '';
-    document.getElementById('auth-pw').focus();
-  }
-}
-</script>
+<body>
 
 <header>
   <h1>Singapore Property Market Dashboard</h1>
   <div class="meta">
     PropertyGuru Data &middot; 28 Districts &middot; 44,937 active listings
-    &middot; Built 2026-04-21 10:09 UTC
+    &middot; Built 2026-04-21 10:14 UTC
     <span class="badge">rent: 2026-04-20 · sale: 2026-04-20</span>
   </div>
 </header>
